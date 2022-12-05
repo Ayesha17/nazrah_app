@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/splash">
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.nazrah.nazrahapp.fragments.auth.SignUpFragment"
+        android:label="SignUpFragment" />
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.nazrah.nazrahapp.fragments.HomeFragment"
+        android:label="HomeFragment" />
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.nazrah.nazrahapp.fragments.auth.LoginFragment"
+        android:label="LoginFragment" />
+
+
+    <fragment
+        android:id="@+id/splash"
+        android:name="com.nazrah.nazrahapp.fragments.splash.SplashFragment"
+        android:label="SplashFragment" />
+    <fragment
+        android:id="@+id/walkthroughFragment"
+        android:name="com.nazrah.nazrahapp.fragments.splash.WalkthroughFragment"
+        android:label="WalkthroughFragment" />
+</navigation>

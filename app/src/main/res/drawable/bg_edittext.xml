@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/edit_text_focused"   android:insetLeft="10dp"
+        android:state_focused="true"/>
+    <item android:drawable="@drawable/bg_edittext_normal"/>
+</selector>

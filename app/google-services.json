@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "264258497535",
+    "project_id": "cef-mobile-5b080",
+    "storage_bucket": "cef-mobile-5b080.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:264258497535:android:64d6b009470fa72d64d5ca",
+        "android_client_info": {
+          "package_name": "com.nazrah.nazrahapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "264258497535-l16u25oic7gkc39aopa7v52c1aq68oqi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKltuj9IDJMN5fxtGYs-QHkh7u7vKLnBQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "264258497535-l16u25oic7gkc39aopa7v52c1aq68oqi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

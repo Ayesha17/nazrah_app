@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Nazrah </string>
+    <string name="home_fragment">Home Fragment</string>
+    <string name="default_notification_channel_id">nazrahapp</string>
+    <string name="do_you_have_an_account">Do you have an account?</string>
+    <string name="login">Login</string>
+    <string name="register">REGISTER</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="login_button">Login</string>
+    <string name="splash_fragment">Splash Fragment</string>
+    <string name="app_desc">100% free only at Cizo</string>
+    <string name="slide1_title">Welcome to Cizo!</string>
+    <string name="slide1_Desc">Thank you for downloading our app! Enjoy all of Cizo features directly in your hands!</string>
+    <string name="slide2_title">Trusted by Teachers</string>
+    <string name="slide2_Desc">Cizo is trusted by the teachers worldwide to maintain the student learning progress.</string>
+    <string name="slide3_title">Get Ready, be a Superstar!</string>
+    <string name="slide3_Desc">Gather all the poins as much as you can, be a superstar in your class with Cizo!</string>
+    <string name="start_journey">Start the Journey</string>
+    <string name="next">Next</string>
+    <string name="enter_account_password">Enter account password</string>
+    <string name="e_mail_address">E-Mail Address</string>
+    <string name="enter_mail_address">Enter your e-mail address</string>
+    <string name="forgot_password">Forgot Password ?</string>
+</resources>
