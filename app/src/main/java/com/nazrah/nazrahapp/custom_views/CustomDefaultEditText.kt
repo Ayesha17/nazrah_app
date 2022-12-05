@@ -23,7 +23,6 @@ import com.nazrah.nazrahapp.databinding.CustomDefaultEdittextBinding
 import com.nazrah.nazrahapp.utils.getSafe
 import com.nazrah.nazrahapp.utils.restoreChildViewStates
 import com.nazrah.nazrahapp.utils.saveChildViewStates
-import com.nazrah.nazrahapp.utils.setVisible
 
 class CustomDefaultEditText(context: Context, attrs: AttributeSet)
     : LinearLayout(context,  attrs) {
@@ -36,8 +35,8 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
     var drawableStart: Int? = 0
         set(value) {
             field = value
-            if (value != 0)
-                mBinding.textInputLayout.setStartIconDrawable(value ?: 0)
+//            if (value != 0)
+//                mBinding.textInputLayout.setStartIconDrawable(value ?: 0)
 
         }
 
@@ -45,8 +44,8 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
     var endIconMode: Int = 0
         set(value) {
             field = value
-            if (value != 0)
-                mBinding.textInputLayout.endIconMode = value
+//            if (value != 0)
+//                mBinding.textInputLayout.endIconMode = value
         }
 
 
@@ -55,7 +54,7 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
             field = value
             if (value != 0) {
                 if (endIconMode == TextInputLayout.END_ICON_CUSTOM) {
-                    mBinding.textInputLayout.setEndIconDrawable(value ?: 0)
+//                    mBinding.textInputLayout.setEndIconDrawable(value ?: 0)
                 }
             }
         }
@@ -69,8 +68,8 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
     var drawableEnd: Int? = 0
         set(value) {
             field = value
-            if (value != 0)
-                mBinding.textInputLayout.setEndIconDrawable(value ?: 0)
+//            if (value != 0)
+//                mBinding.textInputLayout.setEndIconDrawable(value ?: 0)
         }
 
     var text: String = ""
@@ -83,13 +82,13 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
     var hint: String = ""
         set(value) {
             field = value
-            mBinding.textInputLayout.hint = value
+//            mBinding.textInputLayout.hint = value
         }
 
     var errorText: String? = null
         set(value) {
             field = value
-            mBinding.textInputLayout.error = value
+//            mBinding.textInputLayout.error = value
         }
 
     var click: Boolean = false
@@ -100,10 +99,7 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
                 mBinding.editText.isClickable = true
                 mBinding.editText.isFocusable = false
                 mBinding.editText.isFocusableInTouchMode = false
-                mBinding.textInputLayout.isEnabled = true
-                mBinding.textInputLayout.isClickable = true
-                mBinding.textInputLayout.isFocusable = false
-                mBinding.textInputLayout.isFocusableInTouchMode = false
+
                 mBinding.editText.setOnClickListener {
                     clickCallback?.invoke()
                     return@setOnClickListener
