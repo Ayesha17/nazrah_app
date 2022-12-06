@@ -11,10 +11,16 @@ import com.nazrah.nazrahapp.adapters.ViewPagerClickListener
 import com.nazrah.nazrahapp.base.BaseFragment
 import com.nazrah.nazrahapp.databinding.FragmentWalkthroughBinding
 import com.nazrah.nazrahapp.models.ViewPagerItem
+import com.nazrah.nazrahapp.preferences.Preferences
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class WalkthroughFragment : BaseFragment(), TabLayoutMediator.TabConfigurationStrategy {
     private lateinit var mBinding: FragmentWalkthroughBinding
 
+    @Inject
+    lateinit var preferences: Preferences
     override fun getFragmentLayout() = R.layout.fragment_walkthrough
 
     override fun getViewBinding() {
@@ -90,7 +96,8 @@ class WalkthroughFragment : BaseFragment(), TabLayoutMediator.TabConfigurationSt
                 mBinding.pager.setCurrentItem(currentItem.inc(), true)
             }
             else -> {
-                findNavController().navigate(R.id.loginFragment)
+                preferences.firstTimeLaunch=true
+                findNavController().navigate(R.id.authFragment)
             }
         }
     }

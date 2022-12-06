@@ -15,9 +15,10 @@ import com.nazrah.nazrahapp.utils.Constants
 import com.nazrah.nazrahapp.utils.FirebaseUtils
 import com.nazrah.nazrahapp.utils.sixDigitsCode
 import com.nazrah.nazrahapp.utils.toastMessage
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.random.Random
-
-internal class HomeFragment : BaseFragment() {
+@AndroidEntryPoint
+class HomeFragment : BaseFragment() {
     private lateinit var mBinding: FragmentHomeBinding
     private lateinit var auth: FirebaseAuth
 

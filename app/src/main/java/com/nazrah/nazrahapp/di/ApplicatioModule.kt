@@ -25,4 +25,11 @@ object ApplicationModule {
     internal fun providesPreferencesWrapper(@ApplicationContext context: Context): PreferencesWrapper {
         return PreferencesWrapper(context)
     }
+    @Provides
+    fun getContext(
+        @ApplicationContext context: Context
+    ): Context {
+        return context
+    }
+
 }

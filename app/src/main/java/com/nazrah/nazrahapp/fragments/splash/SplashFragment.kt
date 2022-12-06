@@ -15,19 +15,24 @@ import com.nazrah.nazrahapp.R
 import com.nazrah.nazrahapp.base.BaseFragment
 import com.nazrah.nazrahapp.databinding.FragmentSplashBinding
 import com.nazrah.nazrahapp.databinding.FragmentWalkthroughBinding
+import com.nazrah.nazrahapp.preferences.Preferences
 import com.nazrah.nazrahapp.utils.Constants
 import com.nazrah.nazrahapp.utils.FirebaseUtils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class SplashFragment : BaseFragment() {
 
     private lateinit var fragmentSplashBinding: FragmentSplashBinding
 
     override fun getFragmentLayout() = R.layout.fragment_splash
 
-
+    @Inject
+    lateinit var preferences: Preferences
     override fun getViewBinding() {
         fragmentSplashBinding = binding as FragmentSplashBinding
     }
@@ -48,7 +53,10 @@ class SplashFragment : BaseFragment() {
         lifecycleScope.launch {
             delay(5000)
             if (FirebaseUtils.firebaseAuth.currentUser == null) {
+                if (!preferences.firstTimeLaunch)
                 findNavController().navigate(R.id.walkthroughFragment)
+               else
+                   findNavController().navigate(R.id.authFragment)
             } else {
                 Timber.e("Constants.USERS name " + FirebaseUtils.firebaseAuth.currentUser!!.displayName)
                 Timber.e("Constants.USERS phoneNumber " + FirebaseUtils.firebaseAuth.currentUser!!.phoneNumber)

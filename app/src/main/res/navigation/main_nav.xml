@@ -27,4 +27,8 @@
         android:id="@+id/walkthroughFragment"
         android:name="com.nazrah.nazrahapp.fragments.splash.WalkthroughFragment"
         android:label="WalkthroughFragment" />
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.nazrah.nazrahapp.fragments.auth.AuthFragment"
+        android:label="AuthFragment" />
 </navigation>

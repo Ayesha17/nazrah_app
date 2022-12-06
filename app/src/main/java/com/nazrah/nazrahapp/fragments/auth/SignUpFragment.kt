@@ -41,12 +41,13 @@ import com.nazrah.nazrahapp.base.BaseFragment
 import com.nazrah.nazrahapp.databinding.FragmentSignupBinding
 import com.nazrah.nazrahapp.utils.*
 import com.nazrah.nazrahapp.utils.Constants.USERS
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
-
+@AndroidEntryPoint
 class SignUpFragment : BaseFragment() {
     private lateinit var mBinding: FragmentSignupBinding
 

@@ -7,8 +7,10 @@ import com.nazrah.nazrahapp.base.BaseFragment
 import com.nazrah.nazrahapp.databinding.FragmentLoginBinding
 import com.nazrah.nazrahapp.utils.FirebaseUtils
 import com.nazrah.nazrahapp.utils.toastMessage
+import dagger.hilt.android.AndroidEntryPoint
 
-internal class LoginFragment : BaseFragment() {
+@AndroidEntryPoint
+class LoginFragment : BaseFragment() {
     private lateinit var mBinding: FragmentLoginBinding
 
     override fun getFragmentLayout() = R.layout.fragment_login

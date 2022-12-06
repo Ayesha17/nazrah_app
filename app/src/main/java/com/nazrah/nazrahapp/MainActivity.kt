@@ -12,9 +12,11 @@ import com.nazrah.nazrahapp.fragments.splash.SplashFragment
 import com.nazrah.nazrahapp.utils.Constants
 import com.nazrah.nazrahapp.utils.FirebaseUtils
 import com.nazrah.nazrahapp.utils.setVisible
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 

@@ -20,9 +20,6 @@
             android:text="Full Name"
             app:layout_constraintTop_toTopOf="parent" />
 
-
-
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/editText"
                 android:layout_height="@dimen/dp60"
@@ -30,7 +27,7 @@
                 android:layout_width="match_parent"
                 android:gravity="center_vertical"
                 android:hint="Dtdjkdk"
-                android:drawableLeft="@drawable/ic_lock"
+                android:drawableLeft="@drawable/ic_mail"
                 android:textSize="14sp"
                 android:background="@drawable/bg_edittext"
                 app:hintTextColor="@color/light_grey" />

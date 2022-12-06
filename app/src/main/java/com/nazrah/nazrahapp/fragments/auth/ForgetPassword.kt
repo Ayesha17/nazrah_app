@@ -4,7 +4,9 @@ import android.view.View
 import com.google.firebase.auth.FirebaseAuth
 import com.nazrah.nazrahapp.R
 import com.nazrah.nazrahapp.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ForgetPassword : BaseFragment() {
     private var mAuth: FirebaseAuth? = null
     override fun getFragmentLayout(): Int = R.layout.fragment_splash

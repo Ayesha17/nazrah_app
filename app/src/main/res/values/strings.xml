@@ -4,6 +4,7 @@
     <string name="default_notification_channel_id">nazrahapp</string>
     <string name="do_you_have_an_account">Do you have an account?</string>
     <string name="login">Login</string>
+    <string name="signup">Sign Up</string>
     <string name="register">REGISTER</string>
     <string name="password">Password</string>
     <string name="email">Email</string>

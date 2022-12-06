@@ -35,27 +35,20 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
     var drawableStart: Int? = 0
         set(value) {
             field = value
-//            if (value != 0)
-//                mBinding.textInputLayout.setStartIconDrawable(value ?: 0)
+            if (value != 0)
+                mBinding.editText.setCompoundDrawables(context.getDrawable(value ?: 0),null,null,null)
 
         }
 
 
-    var endIconMode: Int = 0
-        set(value) {
-            field = value
-//            if (value != 0)
-//                mBinding.textInputLayout.endIconMode = value
-        }
 
-
-    var drawable: Int? = 0
+    var drawableEnd: Int? = 0
         set(value) {
             field = value
             if (value != 0) {
-                if (endIconMode == TextInputLayout.END_ICON_CUSTOM) {
-//                    mBinding.textInputLayout.setEndIconDrawable(value ?: 0)
-                }
+
+                    mBinding.editText.setCompoundDrawables(null,null,context.getDrawable(value ?: 0),null)
+
             }
         }
 
@@ -65,12 +58,7 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
             mBinding.editText.inputType = value.getSafe()
 
         }
-    var drawableEnd: Int? = 0
-        set(value) {
-            field = value
-//            if (value != 0)
-//                mBinding.textInputLayout.setEndIconDrawable(value ?: 0)
-        }
+
 
     var text: String = ""
         set(value) {
@@ -82,13 +70,14 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
     var hint: String = ""
         set(value) {
             field = value
-//            mBinding.textInputLayout.hint = value
+            mBinding.editText.hint = value
         }
 
     var errorText: String? = null
         set(value) {
             field = value
-//            mBinding.textInputLayout.error = value
+            if(value.isNullOrEmpty().not())
+            mBinding.editText.error = value
         }
 
     var click: Boolean = false
@@ -145,15 +134,10 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
             R.styleable.CustomDefaultEditText_android_inputType,
             InputType.TYPE_CLASS_TEXT
         ).getSafe()
-        endIconMode = styledAttributes.getInt(
-            R.styleable.CustomDefaultEditText_endIconMode,
-            TextInputLayout.END_ICON_NONE
-        ).getSafe()
+
         val imeOptions =
             styledAttributes.getInt(R.styleable.CustomDefaultEditText_android_imeOptions, 0)
                 .getSafe()
-        drawable =
-            styledAttributes.getResourceId(R.styleable.CustomDefaultEditText_drawable, 0)
 
         mBinding.editText.imeOptions = imeOptions
 
