@@ -8,6 +8,9 @@
     <string name="register">REGISTER</string>
     <string name="password">Password</string>
     <string name="email">Email</string>
+    <string name="full_name">Full Name</string>
+    <string name="enter_full_name">Enter your full name</string>
+    <string name="create_pwd">Create account password</string>
     <string name="login_button">Login</string>
     <string name="splash_fragment">Splash Fragment</string>
     <string name="app_desc">100% free only at Cizo</string>

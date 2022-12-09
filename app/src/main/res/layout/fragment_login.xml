@@ -2,57 +2,41 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:fillViewport="true">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/dp16"
         tools:context=".RegisterActivity">
-        <TextView
-            android:id="@+id/tvEmailText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp16"
-            android:text="@string/e_mail_address"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <com.nazrah.nazrahapp.custom_views.CustomDefaultEditText
             android:id="@+id/etEmail"
             android:layout_width="0dp"
+            app:title="@string/e_mail_address"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp16"
-            android:inputType="textEmailAddress"
             android:hint="@string/enter_mail_address"
-            app:drawable="@drawable/ic_mail"
+            android:inputType="textEmailAddress"
+            app:drawableStart="@drawable/ic_mail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvEmailText" />
-        <TextView
-            android:id="@+id/tvPasswordText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp16"
-            android:text="@string/password"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.nazrah.nazrahapp.custom_views.CustomDefaultEditText
             android:id="@+id/etPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            app:title="@string/password"
             android:layout_marginTop="@dimen/dp16"
-            android:inputType="textVisiblePassword"
-            app:drawable="@drawable/ic_lock"
             android:hint="@string/enter_account_password"
+            android:inputType="textVisiblePassword"
+            app:drawableStart="@drawable/ic_lock"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPasswordText" />
+            app:layout_constraintTop_toBottomOf="@+id/etEmail" />
 
         <TextView
             android:id="@+id/tvForgetPassword"
@@ -83,4 +67,5 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
 </layout>

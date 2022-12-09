@@ -12,7 +12,7 @@
     <attr name="textColorRes" format="reference" />
     <attr name="buttonTheme" format="string" />
     <attr name="descText" format="string" />
-    <attr name="drawableStart" format="reference" />
+    <attr name="drawableStart" format="integer" />
     <attr name="drawableEnd" format="reference" />
     <attr name="descType" format="string" />
     <attr name="textStyle" format="reference" />
@@ -73,6 +73,7 @@
         <attr name="drawableStart" />
         <attr name="drawableEnd" />
         <attr name="drawable" />
+        <attr name="title" />
         <attr name="android:hint" />
         <attr name="hintTextColor" />
         <attr name="android:textColor" />

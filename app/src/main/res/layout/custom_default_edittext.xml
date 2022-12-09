@@ -25,10 +25,10 @@
                 android:layout_height="@dimen/dp60"
                 android:layout_marginTop="@dimen/dp16"
                 android:layout_width="match_parent"
+                android:drawablePadding="@dimen/dp16"
                 android:gravity="center_vertical"
                 android:hint="Dtdjkdk"
-                android:drawableLeft="@drawable/ic_mail"
-                android:textSize="14sp"
+                 android:textSize="14sp"
                 android:background="@drawable/bg_edittext"
                 app:hintTextColor="@color/light_grey" />
 

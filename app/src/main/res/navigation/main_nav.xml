@@ -19,6 +19,7 @@
         android:label="LoginFragment" />
 
 
+
     <fragment
         android:id="@+id/splash"
         android:name="com.nazrah.nazrahapp.fragments.splash.SplashFragment"
@@ -30,5 +31,13 @@
     <fragment
         android:id="@+id/authFragment"
         android:name="com.nazrah.nazrahapp.fragments.auth.AuthFragment"
-        android:label="AuthFragment" />
+        android:label="AuthFragment">
+    <action
+        android:id="@+id/action_loginFragment_to_forgetPassword"
+        app:destination="@id/forgetPassword" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgetPassword"
+        android:name="com.nazrah.nazrahapp.fragments.auth.ForgetPassword"
+        android:label="ForgetPassword" />
 </navigation>
