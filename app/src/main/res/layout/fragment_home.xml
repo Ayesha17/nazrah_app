@@ -38,7 +38,7 @@
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:fabCustomSize="@dimen/dp70"
+                app:fabCustomSize="@dimen/dp60"
                 app:tint="@android:color/white"
                 app:shapeAppearanceOverlay="@style/fab_rounded"
                 android:contentDescription="@string/app_name"

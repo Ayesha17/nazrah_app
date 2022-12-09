@@ -56,7 +56,7 @@ class SplashFragment : BaseFragment() {
                 if (!preferences.firstTimeLaunch)
                 findNavController().navigate(R.id.walkthroughFragment)
                else
-                   findNavController().navigate(R.id.authFragment)
+                   findNavController().navigate(R.id.homeFragment)
             } else {
                 Timber.e("Constants.USERS name " + FirebaseUtils.firebaseAuth.currentUser!!.displayName)
                 Timber.e("Constants.USERS phoneNumber " + FirebaseUtils.firebaseAuth.currentUser!!.phoneNumber)
