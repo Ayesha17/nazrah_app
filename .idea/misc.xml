@@ -3,18 +3,23 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable-v24/selector_primary50_transparent.xml" value="0.1105" />
-        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/ic_lock.xml" value="0.1105" />
-        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/ic_lock_blue.xml" value="0.1105" />
-        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/ic_mail.xml" value="0.1105" />
-        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/ic_mail_blue.xml" value="0.1105" />
-        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/ic_person.xml" value="0.1105" />
-        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/ic_person_blue.xml" value="0.1105" />
-        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/round_couner_primary.xml" value="0.1105" />
-        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/solid_primary.xml" value="0.1105" />
-        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/solid_white20.xml" value="0.1105" />
-        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/layout/custom_default_edittext.xml" value="0.18022657054582905" />
-        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/layout/fragment_auth.xml" value="0.17" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable-v24/selector_white_transparent_color.xml" value="0.136" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/bg_edittext.xml" value="0.136" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/bg_edittext_normal.xml" value="0.136" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/ic_backarrow.xml" value="0.136" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/ic_lock.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/ic_mail_blue.xml" value="0.136" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/drawable/spinner_bg.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/layout/custom_default_edittext.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/layout/custom_text_view.xml" value="0.1675213675213675" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/layout/drawer_layout.xml" value="0.1675213675213675" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/layout/drop_down_item_layout.xml" value="0.1" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/layout/fragment_auth.xml" value="0.16540084388185655" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/layout/fragment_forgetpwd.xml" value="0.14" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/layout/fragment_login.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/layout/fragment_signup.xml" value="0.2" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/layout/fragment_splash.xml" value="0.1675213675213675" />
+        <entry key="..\:/AndroidStudioProjects/nazrah_app/app/src/main/res/layout/user_dropdown_layout.xml" value="0.1675213675213675" />
       </map>
     </option>
   </component>

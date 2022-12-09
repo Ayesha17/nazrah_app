@@ -38,9 +38,7 @@ class LoginFragment : BaseFragment() {
         mBinding.apply {
             btnLogin.setOnClickListener(this@LoginFragment)
 
-            tvForgetPassword.setOnClickListener {
-                findNavController().navigate(R.id.signUpFragment)
-            }
+            tvForgetPassword.setOnClickListener(this@LoginFragment)
         }
     }
 
@@ -52,6 +50,8 @@ class LoginFragment : BaseFragment() {
         when (view?.id) {
             R.id.btnLogin -> {
                 login()
+            } R.id.tvForgetPassword -> {
+               findNavController().navigate(R.id.action_loginFragment_to_forgetPassword)
             }
         }
     }

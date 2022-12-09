@@ -1,6 +1,7 @@
 package com.nazrah.nazrahapp.custom_views
 
 import android.content.Context
+import android.os.Build
 import android.os.Parcel
 import android.os.Parcelable
 import android.text.InputFilter
@@ -24,8 +25,7 @@ import com.nazrah.nazrahapp.utils.getSafe
 import com.nazrah.nazrahapp.utils.restoreChildViewStates
 import com.nazrah.nazrahapp.utils.saveChildViewStates
 
-class CustomDefaultEditText(context: Context, attrs: AttributeSet)
-    : LinearLayout(context,  attrs) {
+class CustomDefaultEditText(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
     private val defaultCharLength = 50
 
@@ -36,10 +36,14 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
         set(value) {
             field = value
             if (value != 0)
-                mBinding.editText.setCompoundDrawables(context.getDrawable(value ?: 0),null,null,null)
+                mBinding.editText.setCompoundDrawablesWithIntrinsicBounds(
+                    resources.getDrawable(value?:0),
+                    null,
+                    null,
+                    null
+                )
 
         }
-
 
 
     var drawableEnd: Int? = 0
@@ -47,7 +51,12 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
             field = value
             if (value != 0) {
 
-                    mBinding.editText.setCompoundDrawables(null,null,context.getDrawable(value ?: 0),null)
+                mBinding.editText.setCompoundDrawables(
+                    null,
+                    null,
+                    resources.getDrawable(value ?: 0),
+                    null
+                )
 
             }
         }
@@ -66,6 +75,12 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
             mBinding.editText.setText(SpannableString(value))
         }
         get() = mBinding.editText.text.toString()
+    var title: String = ""
+        set(value) {
+            field = value
+            mBinding.tvTitle.setText(value)
+        }
+
 
     var hint: String = ""
         set(value) {
@@ -76,14 +91,14 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
     var errorText: String? = null
         set(value) {
             field = value
-            if(value.isNullOrEmpty().not())
-            mBinding.editText.error = value
+            if (value.isNullOrEmpty().not())
+                mBinding.editText.error = value
         }
 
     var click: Boolean = false
         set(value) {
             field = value
-            if (click){
+            if (click) {
                 mBinding.editText.isEnabled = true
                 mBinding.editText.isClickable = true
                 mBinding.editText.isFocusable = false
@@ -118,13 +133,15 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
             styledAttributes.getResourceId(R.styleable.CustomDefaultEditText_drawableStart, 0)
         drawableEnd =
             styledAttributes.getResourceId(R.styleable.CustomDefaultEditText_drawableEnd, 0)
+        title = styledAttributes.getString(R.styleable.CustomDefaultEditText_title).getSafe()
         text = styledAttributes.getString(R.styleable.CustomDefaultEditText_android_text).getSafe()
         errorText =
             styledAttributes.getString(R.styleable.CustomDefaultEditText_error)
                 .getSafe()
         hint = styledAttributes.getString(R.styleable.CustomDefaultEditText_android_hint).getSafe()
-        click = styledAttributes.getBoolean(R.styleable.CustomDefaultEditText_click,false)
-        val digits = styledAttributes.getString(R.styleable.CustomDefaultEditText_android_digits).getSafe()
+        click = styledAttributes.getBoolean(R.styleable.CustomDefaultEditText_click, false)
+        val digits =
+            styledAttributes.getString(R.styleable.CustomDefaultEditText_android_digits).getSafe()
 
         maxLength = styledAttributes.getInt(
             R.styleable.CustomDefaultEditText_android_maxLength,
@@ -141,7 +158,7 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
 
         mBinding.editText.imeOptions = imeOptions
 
-        if(digits.isEmpty().not())
+        if (digits.isEmpty().not())
             mBinding.editText.keyListener = DigitsKeyListener.getInstance(digits)
         mBinding.editText.setRawInputType(inputType.getSafe())
 
@@ -152,7 +169,17 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
             }
             return@setOnEditorActionListener false
         }
-
+        mBinding.editText.setOnFocusChangeListener { view, b ->
+            if (view.isFocusable)
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    mBinding.editText.getCompoundDrawables()[0].setTint(
+                        resources.getColor(
+                            R.color.activated,
+                            null
+                        )
+                    )
+                }
+        }
         if (errorText != null) {
             mBinding.editText.doAfterTextChanged {
                 errorText = null
@@ -204,7 +231,7 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
     }
 
     override fun onRestoreInstanceState(state: Parcelable) {
-        when (state){
+        when (state) {
             is SavedState -> {
                 super.onRestoreInstanceState(state.superState)
                 state.childrenStates?.let { restoreChildViewStates(it) }
@@ -228,7 +255,8 @@ class CustomDefaultEditText(context: Context, attrs: AttributeSet)
         constructor(superState: Parcelable?) : super(superState)
 
         constructor(source: Parcel) : super(source) {
-            childrenStates = source.readSparseArray<SparseArray<Parcelable>>(javaClass.classLoader) as SparseArray<Parcelable>?
+            childrenStates =
+                source.readSparseArray<SparseArray<Parcelable>>(javaClass.classLoader) as SparseArray<Parcelable>?
         }
 
         override fun writeToParcel(out: Parcel, flags: Int) {

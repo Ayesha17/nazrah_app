@@ -13,6 +13,7 @@ import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
 import  android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -55,6 +56,7 @@ class SignUpFragment : BaseFragment() {
     private var currentFilePath: String? = null
     private var storageRef: StorageReference? = null
     private var downloadUri:Uri?=null
+    private var type:String?=null
     private var filePath:Uri?=null
     //permission launcher
     private var permissionsResultLauncher =
@@ -113,21 +115,25 @@ class SignUpFragment : BaseFragment() {
     override fun init() {
 // creating a storage reference
         storageRef = FirebaseStorage.getInstance().reference
-
+     val typeList=   arrayListOf(Constants.TEACHER, Constants.STUDENTS, Constants.OTHERS)
         val adapter = ArrayAdapter(
             requireContext(),
-            R.layout.drop_down_item_layout,
-            arrayListOf(Constants.TEACHER, Constants.STUDENTS, Constants.OTHERS)
+            android.R.layout.simple_dropdown_item_1line,
+            typeList
         )
         // locationDropDownLayoutBinding.datesFilterSpinner.setText("All Types")
-        mBinding.datesFilterSpinner.setAdapter(adapter)
-        mBinding.typesFilterContainer.startIconDrawable
+        mBinding.spType.setAdapter(adapter)
+        mBinding.spType.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>,
+                                        view: View, position: Int, id: Long) {
+                type=typeList[position]
+            }
 
-        mBinding.datesFilterSpinner.setDropDownBackgroundDrawable(
-            ResourcesCompat.getDrawable(
-                resources, R.drawable.filter_spinner_dropdown_bg, null
-            )
-        )
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                // write code to perform some action
+            }
+        }
 
         val user = Firebase.auth.currentUser
 
@@ -136,10 +142,8 @@ class SignUpFragment : BaseFragment() {
     override fun setListeners() {
         mBinding.apply {
             ivProfilePic.setOnClickListener(this@SignUpFragment)
-
-            buttonRegister.setOnClickListener(this@SignUpFragment)
-            textViewLogin.setOnClickListener(this@SignUpFragment)
-        }
+            btRegister.setOnClickListener(this@SignUpFragment)
+         }
     }
 
     override fun setLanguageData() {
@@ -175,34 +179,32 @@ class SignUpFragment : BaseFragment() {
             R.id.ivProfilePic -> {
                 requestPermissions()
             }
-            R.id.buttonRegister -> {
+            R.id.btRegister -> {
 
-                if (mBinding.editTextEmailAddress.text.toString().isEmpty()) {
+                if (mBinding.etEmail.text.toString().isEmpty()) {
                     requireContext().toastMessage("Please enter email ")
-                } else if (mBinding.editTextPassword.text.toString().isEmpty()) {
+                } else if (mBinding.etPassword.text.toString().isEmpty()) {
                     requireContext().toastMessage("Please enter password ")
-                } else if (mBinding.datesFilterSpinner.text.toString().isEmpty()) {
+                } else if (type?.isEmpty()==true) {
                     requireContext().toastMessage("Please select any profession ")
                 } else {
                     register()
                 }
             }
-            R.id.textViewLogin -> {
-                findNavController().navigate(R.id.loginFragment)
-            }
+
         }
     }
 
     private fun register() {
-        val email = mBinding.editTextEmailAddress.text.toString()
-        val password = mBinding.editTextPassword.text.toString()
+        val email = mBinding.etEmail.text.toString()
+        val password = mBinding.etPassword.text.toString()
         if (email.isNotBlank() && email.isNotEmpty() && password.isNotBlank() && password.isNotEmpty()) {
             FirebaseUtils.firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
                         lifecycleScope.launch {
                             val profileUpdates = userProfileChangeRequest {
-                                displayName = mBinding.editTextName.text.toString()
+                                displayName = mBinding.etFullName.text.toString()
                                 photoUri = downloadUri
 //                                photoUri = Uri.parse("https://example.com/jane-q-user/profile.jpg")
                             }
@@ -226,7 +228,7 @@ class SignUpFragment : BaseFragment() {
 
         val user = hashMapOf(
             "user_id" to task.result.user?.uid,
-            "type" to Constants.hashMap[mBinding.datesFilterSpinner.text.toString()],
+            "type" to Constants.hashMap[type],
             "classes" to "",
             "classes_join" to ""
         )
