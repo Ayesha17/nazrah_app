@@ -4,13 +4,19 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nazrah.nazrahapp.R
+import com.nazrah.nazrahapp.databinding.LayoutDefaultItemsBinding
 import com.nazrah.nazrahapp.databinding.WalkthroughItemBinding
+import com.nazrah.nazrahapp.models.ProfileItem
+import com.nazrah.nazrahapp.models.ViewPagerItem
 import dagger.hilt.android.AndroidEntryPoint
 
-class ProfileAdapter : RecyclerView.Adapter<ViewPagerAdapter.PageHolder>() {
+class ProfileAdapter(
+    private val mListener: ViewPagerClickListener,
+    private val profileItems: List<ProfileItem?>
+) : RecyclerView.Adapter<ProfileAdapter.ProfileHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerAdapter.PageHolder {
-        val binding = WalkthroughItemBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileHolder {
+        val binding = LayoutDefaultItemsBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -18,24 +24,22 @@ class ProfileAdapter : RecyclerView.Adapter<ViewPagerAdapter.PageHolder>() {
         return ProfileHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewPagerAdapter.PageHolder, position: Int) {
+    override fun onBindViewHolder(holder: ProfileHolder, position: Int) {
         holder.apply {
             binding.apply {
                 clickListener = mListener
-                data = viewPagerItems[position]
+                data = profileItems[position]
                 ivThumbnail.setImageResource(data?.image ?: 0)
-                if (position == viewPagerItems.size.dec()) {
-                    btnNext.text = root.context.getString(R.string.start_journey)
-                }
+
                 binding.executePendingBindings()
             }
         }
 
     }
 
-    override fun getItemCount() = viewPagerItems.size
+    override fun getItemCount() = profileItems.size
 
-    inner class ProfileHolder(val binding: Item) :
+    inner class ProfileHolder(val binding: LayoutDefaultItemsBinding) :
         RecyclerView.ViewHolder(binding.root)
 
 }
