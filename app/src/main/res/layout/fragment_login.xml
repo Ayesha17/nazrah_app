@@ -65,6 +65,20 @@
             app:layout_constraintTop_toBottomOf="@+id/tvForgetPassword"
             app:layout_constraintVertical_bias="1.0" />
 
+        <me.ibrahimsn.lib.CirclesLoadingView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:animDelay="150"
+            android:visibility="gone"
+            app:animDistance="10dp"
+            app:animDuration="500"
+            app:animInterpolator="accelerateDecelerate"
+            app:circleMargin="8dp"
+            app:circleRadius="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

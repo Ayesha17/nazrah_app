@@ -99,5 +99,6 @@ dependencies {
     //image crop
     implementation 'com.vanniktech:android-image-cropper:4.3.3'
 
+    implementation 'com.github.ibrahimsn98:CirclesLoadingView:1.0'
 
 }
