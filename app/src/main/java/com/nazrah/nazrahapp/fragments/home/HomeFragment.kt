@@ -36,15 +36,7 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun init() {
-        val radius = resources.getDimension( R.dimen.dp24)
 
-
-        val bottomBarBackground = mBinding.bottomAppBar.background as MaterialShapeDrawable
-        bottomBarBackground.shapeAppearanceModel = bottomBarBackground.shapeAppearanceModel
-            .toBuilder()
-            .setTopRightCorner(CornerFamily.ROUNDED, radius)
-            .setTopLeftCorner(CornerFamily.ROUNDED, radius)
-            .build()
 
 //        mBinding.createClassBtn.setOnClickListener {
 //

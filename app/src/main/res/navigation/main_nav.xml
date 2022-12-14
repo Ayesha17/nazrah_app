@@ -40,4 +40,8 @@
         android:id="@+id/forgetPassword"
         android:name="com.nazrah.nazrahapp.fragments.auth.ForgetPassword"
         android:label="ForgetPassword" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.nazrah.nazrahapp.fragments.profile.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>

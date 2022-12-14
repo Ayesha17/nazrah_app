@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/search"
+        android:id="@+id/homeFragment"
          android:icon="@drawable/ic_lock"
          android:title="@string/home_fragment" />
     <item
@@ -10,7 +10,7 @@
          android:title="" />
 
     <item
-        android:id="@+id/more"
+        android:id="@+id/profileFragment"
          android:icon="@drawable/ic_person"
          android:title="@string/profile" />
 

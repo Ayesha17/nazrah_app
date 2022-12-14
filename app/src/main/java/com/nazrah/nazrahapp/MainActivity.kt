@@ -1,12 +1,14 @@
 package com.nazrah.nazrahapp
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.TooltipCompat
-import androidx.core.view.forEach
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.MaterialShapeDrawable
 import com.nazrah.nazrahapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,11 +22,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-         binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         //load parent screens
         parentScreenList()
         setSetupBottomNavAndNavHost()
+        navigationDestinationListener()
 
 //        lifecycleScope.launch {
 //            delay(5000)
@@ -66,17 +69,34 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
         bottomNavigationView.setupWithNavController(mNavController)
+        val radius = resources.getDimension( R.dimen.dp24)
 
-        bottomNavigationView.menu.forEach {             TooltipCompat.setTooltipText(findViewById(it.itemId), null) }
 
+        val bottomBarBackground = binding.bottomAppBar.background as MaterialShapeDrawable
+        bottomBarBackground.shapeAppearanceModel = bottomBarBackground.shapeAppearanceModel
+            .toBuilder()
+            .setTopRightCorner(CornerFamily.ROUNDED, radius)
+            .setTopLeftCorner(CornerFamily.ROUNDED, radius)
+            .build()
+
+    }
+
+    private fun navigationDestinationListener() {
+        mNavController.addOnDestinationChangedListener { _, destination, _ ->
+            checkBottomNavigation(destination.id)
+        }
+    }
+
+    private fun checkBottomNavigation(id: Int) {
+        if (parentScreen.contains(id)) {
+            binding.coordinatorLayout.visibility = View.VISIBLE
+        } else
+            binding.coordinatorLayout.visibility = View.GONE
 
     }
     private fun parentScreenList() {
         parentScreen.add(R.id.homeFragment)
-        parentScreen.add(R.id.chatFragment)
-//        parentScreen.add(R.id.comingSoonFragment)
-        parentScreen.add(R.id.bookingListingFragment)
-        parentScreen.add(R.id.profileMenuFragment)
+        parentScreen.add(R.id.profileFragment)
     }
 
 }
