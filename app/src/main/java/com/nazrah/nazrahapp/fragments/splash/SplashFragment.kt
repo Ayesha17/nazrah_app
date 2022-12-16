@@ -52,28 +52,29 @@ class SplashFragment : BaseFragment() {
     override fun init() {
         lifecycleScope.launch {
             delay(5000)
-            if (FirebaseUtils.firebaseAuth.currentUser == null) {
+            if (preferences.user == null) {
                 if (!preferences.firstTimeLaunch)
                 findNavController().navigate(R.id.walkthroughFragment)
                else
                    findNavController().navigate(R.id.homeFragment)
             } else {
-                Timber.e("Constants.USERS name " + FirebaseUtils.firebaseAuth.currentUser!!.displayName)
-                Timber.e("Constants.USERS phoneNumber " + FirebaseUtils.firebaseAuth.currentUser!!.phoneNumber)
-                Timber.e("Constants.USERS photoUrl " + FirebaseUtils.firebaseAuth.currentUser!!.photoUrl)
-                Timber.e("Constants.USERS email " + FirebaseUtils.firebaseAuth.currentUser!!.email)
-                val db = Firebase.firestore(Firebase.app)
-                db.collection(Constants.USERS)
-                    .document(FirebaseUtils.firebaseAuth.currentUser?.uid!!).get()
-                    .addOnCompleteListener {
-                        if (it.isSuccessful) {
-                            Timber.e(
-                                "Constants.USERS type " + it.result.get("type")
-                            )
-                        }
-                    }.addOnFailureListener {
-                        Timber.e("exception " + it.message)
-                    }
+//                Timber.e("Constants.USERS name " + FirebaseUtils.firebaseAuth.currentUser!!.displayName)
+//                Timber.e("Constants.USERS phoneNumber " + FirebaseUtils.firebaseAuth.currentUser!!.phoneNumber)
+//                Timber.e("Constants.USERS photoUrl " + FirebaseUtils.firebaseAuth.currentUser!!.photoUrl)
+//                Timber.e("Constants.USERS email " + FirebaseUtils.firebaseAuth.currentUser!!.email)
+//                val db = Firebase.firestore(Firebase.app)
+//                db.collection(Constants.USERS)
+//                    .document(FirebaseUtils.firebaseAuth.currentUser?.uid!!).get()
+//                    .addOnCompleteListener {
+//
+//                        if (it.isSuccessful) {
+//                            Timber.e(
+//                                "Constants.USERS type " + it.result.get("type")
+//                            )
+//                        }
+//                    }.addOnFailureListener {
+//                        Timber.e("exception " + it.message)
+//                    }
                 findNavController().navigate(R.id.homeFragment)
             }
         }

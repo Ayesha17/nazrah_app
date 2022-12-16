@@ -49,24 +49,25 @@ class LoginFragment : BaseFragment() {
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.btnLogin -> {
-                mBinding.
                 login()
-            } R.id.tvForgetPassword -> {
-               findNavController().navigate(R.id.action_loginFragment_to_forgetPassword)
+            }
+            R.id.tvForgetPassword -> {
+                findNavController().navigate(R.id.action_loginFragment_to_forgetPassword)
             }
         }
     }
 
     private fun login() {
         val email = mBinding.etEmail.text.toString()
-        val password = mBinding.etPassword  .text.toString()
+        val password = mBinding.etPassword.text.toString()
 
         if (email.isNotBlank() && email.isNotEmpty() && password.isNotBlank() && password.isNotEmpty()) {
-            FirebaseUtils.firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    findNavController().navigate(R.id.homeFragment)
-                }
-            }.addOnFailureListener { exception ->
+            FirebaseUtils.firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        findNavController().navigate(R.id.homeFragment)
+                    }
+                }.addOnFailureListener { exception ->
                 requireContext().toastMessage(exception.localizedMessage)
             }
         } else {

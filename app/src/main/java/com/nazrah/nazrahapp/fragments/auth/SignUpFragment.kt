@@ -4,6 +4,7 @@ import android.Manifest
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.Intent.getIntent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -12,22 +13,23 @@ import android.os.Environment
 import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
-import  android.view.View
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.canhub.cropper.CropImageContractOptions
 import com.canhub.cropper.CropImageView
 import com.canhub.cropper.options
 import com.google.android.gms.tasks.Continuation
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.firestore.ktx.firestore
@@ -40,6 +42,8 @@ import com.nazrah.nazrahapp.BuildConfig
 import com.nazrah.nazrahapp.R
 import com.nazrah.nazrahapp.base.BaseFragment
 import com.nazrah.nazrahapp.databinding.FragmentSignupBinding
+import com.nazrah.nazrahapp.models.UserData
+import com.nazrah.nazrahapp.preferences.Preferences
 import com.nazrah.nazrahapp.utils.*
 import com.nazrah.nazrahapp.utils.Constants.USERS
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,17 +51,36 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.io.File
 import java.util.*
-import kotlin.collections.ArrayList
+import javax.inject.Inject
+
+
 @AndroidEntryPoint
 class SignUpFragment : BaseFragment() {
     private lateinit var mBinding: FragmentSignupBinding
 
+    @Inject
+    lateinit var preferences: Preferences
     private var currentFileUri: Uri? = null
     private var currentFilePath: String? = null
     private var storageRef: StorageReference? = null
-    private var downloadUri:Uri?=null
-    private var type:String?=null
-    private var filePath:Uri?=null
+    private var downloadUri: Uri? = null
+    private var type: String? = null
+    private var filePath: Uri? = null
+
+    //   var mAuthListener = object: FirebaseAuth.AuthStateListener  {
+//       override fun onAuthStateChanged(firebaseAuth: FirebaseAuth) {
+//           var user = firebaseAuth.getCurrentUser();
+//           if (user != null) {
+//               // User is signed in
+//               // NOTE: this Activity should get onpen only when the user is not signed in, otherwise
+//               // the user will receive another verification email.
+//               sendVerificationEmail();
+//           } else {
+//               // User is signed out
+//
+//           }
+//       }
+//      }
     //permission launcher
     private var permissionsResultLauncher =
         registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { success ->
@@ -70,7 +93,7 @@ class SignUpFragment : BaseFragment() {
     private var cropImage = registerForActivityResult(CameraCrop()) { result ->
         when {
             result.isSuccessful -> {
-                filePath=Uri.parse(result.uriContent.toString())
+                filePath = Uri.parse(result.uriContent.toString())
                 if (filePath != null) {
                     mBinding.ivProfilePic.loadImage(filePath)
                     uploadImage()
@@ -115,7 +138,7 @@ class SignUpFragment : BaseFragment() {
     override fun init() {
 // creating a storage reference
         storageRef = FirebaseStorage.getInstance().reference
-     val typeList=   arrayListOf(Constants.TEACHER, Constants.STUDENTS, Constants.OTHERS)
+        val typeList = arrayListOf(Constants.TEACHER, Constants.STUDENTS, Constants.OTHERS)
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_dropdown_item_1line,
@@ -125,9 +148,11 @@ class SignUpFragment : BaseFragment() {
         mBinding.spType.setAdapter(adapter)
         mBinding.spType.onItemSelectedListener = object :
             AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>,
-                                        view: View, position: Int, id: Long) {
-                type=typeList[position]
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View, position: Int, id: Long
+            ) {
+                type = typeList[position]
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -143,37 +168,40 @@ class SignUpFragment : BaseFragment() {
         mBinding.apply {
             ivProfilePic.setOnClickListener(this@SignUpFragment)
             btRegister.setOnClickListener(this@SignUpFragment)
-         }
+        }
     }
 
     override fun setLanguageData() {
 
     }
-    private fun uploadImage(){
-        if(filePath != null){
+
+    private fun uploadImage() {
+        if (filePath != null) {
             val ref = storageRef?.child("uploads/" + UUID.randomUUID().toString())
             val uploadTask = ref?.putFile(filePath!!)
 
-            val urlTask = uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-                if (!task.isSuccessful) {
-                    task.exception?.let {
-                        throw it
+            val urlTask =
+                uploadTask?.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+                    if (!task.isSuccessful) {
+                        task.exception?.let {
+                            throw it
+                        }
                     }
-                }
-                return@Continuation ref.downloadUrl
-            })?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    downloadUri = task.result
-                } else {
-                    // Handle failures
-                }
-            }?.addOnFailureListener{
+                    return@Continuation ref.downloadUrl
+                })?.addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        downloadUri = task.result
+                    } else {
+                        // Handle failures
+                    }
+                }?.addOnFailureListener {
 
-            }
-        }else{
+                }
+        } else {
             Toast.makeText(requireContext(), "Please Upload an Image", Toast.LENGTH_SHORT).show()
         }
     }
+
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.ivProfilePic -> {
@@ -185,7 +213,7 @@ class SignUpFragment : BaseFragment() {
                     requireContext().toastMessage("Please enter email ")
                 } else if (mBinding.etPassword.text.toString().isEmpty()) {
                     requireContext().toastMessage("Please enter password ")
-                } else if (type?.isEmpty()==true) {
+                } else if (type?.isEmpty() == true) {
                     requireContext().toastMessage("Please select any profession ")
                 } else {
                     register()
@@ -199,19 +227,60 @@ class SignUpFragment : BaseFragment() {
         val email = mBinding.etEmail.text.toString()
         val password = mBinding.etPassword.text.toString()
         if (email.isNotBlank() && email.isNotEmpty() && password.isNotBlank() && password.isNotEmpty()) {
+
+//            val actionCodeSettings = actionCodeSettings {
+//                // URL you want to redirect back to. The domain (www.example.com) for this
+//                // URL must be whitelisted in the Firebase Console.
+//                url = "https://www.example.com/finishSignUp?cartId=1234"
+//                // This must be true
+//                handleCodeInApp = true
+//                setIOSBundleId("com.example.ios")
+//                setAndroidPackageName(
+//                    "com.nazrah.nazrahapp",
+//                    true, /* installIfNotAvailable */
+//                    "22" /* minimumVersion */)
+//            }
+//            Firebase.auth.sendSignInLinkToEmail(email, actionCodeSettings)
+//                .addOnCompleteListener { task ->
+//                    if (task.isSuccessful) {
+//                       Timber.e( "Email sent.")
+//                    }
+//                }
+
             FirebaseUtils.firebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        lifecycleScope.launch {
-                            val profileUpdates = userProfileChangeRequest {
-                                displayName = mBinding.etFullName.text.toString()
-                                photoUri = downloadUri
+                        FirebaseUtils.firebaseAuth.currentUser?.sendEmailVerification()
+                            ?.addOnCompleteListener(object : OnCompleteListener<Void> {
+
+
+                                override fun onComplete(p0: Task<Void>) {
+
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "please check email for verification.",
+                                            Toast.LENGTH_SHORT
+                                        ).show();
+                                        lifecycleScope.launch {
+                                            val profileUpdates = userProfileChangeRequest {
+                                                displayName = mBinding.etFullName.text.toString()
+                                                photoUri = downloadUri
 //                                photoUri = Uri.parse("https://example.com/jane-q-user/profile.jpg")
-                            }
-                            task.result.user?.updateProfile(profileUpdates)?.await()
-                            Log.e(SignUpFragment::class.java.simpleName, "")
-                            storeInDb(task)
-                        }
+                                            }
+                                            task.result.user?.updateProfile(profileUpdates)?.await()
+                                            Log.e(SignUpFragment::class.java.simpleName, "")
+                                            storeInDb(task)
+                                        }
+                                    } else {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            task.exception.toString(),
+                                            Toast.LENGTH_SHORT
+                                        ).show();
+                                    }
+                                }
+                            })
                     }
                 }.addOnFailureListener { exception ->
                     requireContext().toastMessage(exception.localizedMessage!!.toString())
@@ -233,15 +302,30 @@ class SignUpFragment : BaseFragment() {
             "classes_join" to ""
         )
 
-
         // Add a new document with a generated ID
         db.collection(USERS).document(task.result.user?.uid!!).set(user)
-            .addOnSuccessListener { documentReference ->
-                findNavController().navigate(R.id.homeFragment)
-                Log.e(
-                    SignUpFragment::class.simpleName,
-                    "DocumentSnapshot added with ID: ${documentReference.toString()}"
+            .addOnSuccessListener {
+                preferences.user = UserData(
+                    task.result.user?.uid,
+                    mBinding.etFullName.text,
+                    downloadUri.toString(),
+                    mBinding.etEmail.text,
+                    Constants.hashMap[type].toString(),
+                    "",
+                    ""
                 )
+
+                DialogUtil(requireContext())
+                    .showDoubleButtonsAlertDialog(
+                        title = getString(R.string.successTitle),
+                        message = getString(R.string.registerSuccess),
+                        positiveButtonStringText = getString(R.string.ok),
+                        positivebuttonCallback = {
+                            findNavController().navigate(R.id.homeFragment)
+                        },
+                    )
+
+
             }
             .addOnFailureListener { e ->
                 Log.w(SignUpFragment::class.simpleName, "Error adding document", e)
@@ -273,7 +357,8 @@ class SignUpFragment : BaseFragment() {
     private fun getPickImageIntent(context: Context): Intent? {
         var chooserIntent: Intent? = null
         var intentList: MutableList<Intent> = ArrayList()
-        val pickIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        val pickIntent =
+            Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         val takePhotoIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val file = createImageFile()
         currentFileUri = getUriFromFile(file)
@@ -398,5 +483,27 @@ class SignUpFragment : BaseFragment() {
             setFixAspectRatio(true)
         }
     }
-
+//    private fun sendVerificationEmail() {
+//        val user = FirebaseAuth.getInstance().currentUser
+//        user!!.sendEmailVerification()
+//            .addOnCompleteListener { task ->
+//                if (task.isSuccessful) {
+//                    // email sent
+//
+//
+//                    // after email is sent just logout the user and finish this activity
+//                    FirebaseAuth.getInstance().signOut()
+//                    startActivity(Intent(this@SignupActivity, LoginActivity::class.java))
+//                    finish()
+//                } else {
+//                    // email not sent, so display message and restart the activity or do whatever you wish to do
+//
+//                    //restart this activity
+//                    overridePendingTransition(0, 0)
+//                    finish()
+//                    overridePendingTransition(0, 0)
+//                    startActivity(getIntent())
+//                }
+//            }
+//    }
 }

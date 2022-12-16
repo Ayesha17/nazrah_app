@@ -37,4 +37,7 @@
     <string name="code_text">Enter quiz code that given by teacher, and you can start gathering points!</string>
     <string name="find_Quiz">Find Quiz</string>
     <string name="search">Search</string>
+    <string name="ok">Ok</string>
+    <string name="successTitle">Success</string>
+    <string name="registerSuccess">You are registered successfully</string>
 </resources>

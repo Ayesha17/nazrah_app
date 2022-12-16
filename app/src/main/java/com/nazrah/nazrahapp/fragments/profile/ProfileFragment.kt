@@ -1,7 +1,10 @@
 package com.nazrah.nazrahapp.fragments.profile
 
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.nazrah.nazrahapp.R
 import com.nazrah.nazrahapp.adapters.ProfileAdapter
 import com.nazrah.nazrahapp.adapters.ProfileItemClickListener
@@ -38,7 +41,12 @@ class ProfileFragment : BaseFragment() {
     override fun init() {
         mBinding.rvProfileList.layoutManager = LinearLayoutManager(requireContext())
         mBinding.rvProfileList.adapter = ProfileAdapter(ProfileItemClickListener {
-            Timber.e("eror ${it.title}")
+  when(it.id){
+            4-> {
+                Firebase.auth.signOut()
+                findNavController().navigate(R.id.action_profileFragment_to_authFragment)
+            }
+  }
         }, getList())
 
     }
