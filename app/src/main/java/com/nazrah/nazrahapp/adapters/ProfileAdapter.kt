@@ -1,6 +1,7 @@
 package com.nazrah.nazrahapp.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nazrah.nazrahapp.R
@@ -11,7 +12,7 @@ import com.nazrah.nazrahapp.models.ViewPagerItem
 import dagger.hilt.android.AndroidEntryPoint
 
 class ProfileAdapter(
-    private val mListener: ViewPagerClickListener,
+    private val mListener: ProfileItemClickListener,
     private val profileItems: List<ProfileItem?>
 ) : RecyclerView.Adapter<ProfileAdapter.ProfileHolder>() {
 
@@ -27,9 +28,9 @@ class ProfileAdapter(
     override fun onBindViewHolder(holder: ProfileHolder, position: Int) {
         holder.apply {
             binding.apply {
-//                clickListener = mListener
-//                data = profileItems[position]
-//                ivThumbnail.setImageResource(data?.image ?: 0)
+                clickListener = mListener
+                data = profileItems[position]
+                ivItemImage.setImageResource(data?.image ?: 0)
 
                 binding.executePendingBindings()
             }
@@ -45,7 +46,7 @@ class ProfileAdapter(
 }
 
 class ProfileItemClickListener(
-    val onClick: () -> Unit,
+    val onClick: (model:ProfileItem ) -> Unit,
 ) {
-    fun onClicked() = onClick()
+    fun onClicked(model:ProfileItem ) = onClick(model )
 }
