@@ -66,6 +66,7 @@
             app:layout_constraintVertical_bias="1.0" />
 
         <me.ibrahimsn.lib.CirclesLoadingView
+            android:id="@+id/loader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:animDelay="150"

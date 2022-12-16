@@ -49,6 +49,7 @@ class LoginFragment : BaseFragment() {
     override fun onClick(view: View?) {
         when (view?.id) {
             R.id.btnLogin -> {
+                mBinding.
                 login()
             } R.id.tvForgetPassword -> {
                findNavController().navigate(R.id.action_loginFragment_to_forgetPassword)

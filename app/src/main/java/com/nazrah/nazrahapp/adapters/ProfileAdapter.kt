@@ -27,9 +27,9 @@ class ProfileAdapter(
     override fun onBindViewHolder(holder: ProfileHolder, position: Int) {
         holder.apply {
             binding.apply {
-                clickListener = mListener
-                data = profileItems[position]
-                ivThumbnail.setImageResource(data?.image ?: 0)
+//                clickListener = mListener
+//                data = profileItems[position]
+//                ivThumbnail.setImageResource(data?.image ?: 0)
 
                 binding.executePendingBindings()
             }
