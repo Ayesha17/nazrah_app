@@ -26,34 +26,61 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <LinearLayout
             android:layout_width="@dimen/dp0"
-            android:layout_height="@dimen/dp140"
-            android:background="@drawable/round_corner_primary"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dp16"
-            android:padding="@dimen/dp12"
+            android:orientation="vertical"
+            android:background="@drawable/rounded_corner_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView">
 
-            <TextView
-                android:id="@+id/tvFindQuizText"
-                style="@style/label_m"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/code"
-                />
+                android:background="@drawable/round_corner_primary"
+                android:orientation="vertical"
+                android:padding="@dimen/dp12">
 
-            <TextView
-                android:id="@+id/tvQuizText"
-                style="@style/label_m"
+                <TextView
+                    android:id="@+id/tvFindQuizText"
+                    style="@style/label_m"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/code" />
+
+                <TextView
+                    android:id="@+id/tvQuizText"
+                    style="@style/label_m"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:text="@string/code_text" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/editText"
+                    android:layout_height="@dimen/dp60"
+                    android:layout_marginTop="@dimen/dp16"
+                    android:layout_width="match_parent"
+                    android:gravity="center_vertical"
+                    android:hint="Search"
+                    android:layout_marginBottom="@dimen/dp16"
+                    android:padding="20dp"
+                    android:textSize="14sp"
+                    android:background="@drawable/rounded_corner_white"
+                    app:hintTextColor="@color/light_grey" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogin"
+                style="@style/button_primary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp10"
-                android:text="@string/code_text"
-                />
+                android:layout_margin="@dimen/dp24"
+                android:text="@string/login"
+                app:cornerRadius="@dimen/dp16"   />
+
         </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
