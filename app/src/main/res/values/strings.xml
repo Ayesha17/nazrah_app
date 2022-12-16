@@ -33,4 +33,8 @@
     <string name="successful_reset_pwd">We have sent 4 digits confirmation code to [0], please take a look and verify it.</string>
     <string name="forgotpassword_text">Forgot your password? don’t worry, just take a simple step and create your new password!</string>
     <string name="profile">Profile</string>
+    <string name="code">Find Quiz Code</string>
+    <string name="code_text">Enter quiz code that given by teacher, and you can start gathering points!</string>
+    <string name="find_Quiz">Find Quiz</string>
+    <string name="search">Search</string>
 </resources>
