@@ -6,8 +6,54 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".RegisterActivity">
+        android:background="@color/background_grey"
+        android:padding="@dimen/dp16">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello, Robert"
+            style="@style/label_m_grey"
+            android:drawableStart="@drawable/ic_lock"
+            android:drawablePadding="@dimen/dp10"
+            android:paddingTop="@dimen/dp10"
+            android:paddingBottom="@dimen/dp10"
+            android:background="@drawable/rounded_corner_white"
+            android:paddingStart="@dimen/dp16"
+            android:paddingEnd="@dimen/dp16"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
+        <LinearLayout
+            android:layout_width="@dimen/dp0"
+            android:layout_height="@dimen/dp140"
+            android:background="@drawable/round_corner_primary"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/dp16"
+            android:padding="@dimen/dp12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView">
+
+            <TextView
+                android:id="@+id/tvFindQuizText"
+                style="@style/label_m"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/code"
+                />
+
+            <TextView
+                android:id="@+id/tvQuizText"
+                style="@style/label_m"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp10"
+                android:text="@string/code_text"
+                />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
