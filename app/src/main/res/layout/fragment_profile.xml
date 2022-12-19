@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
     <data>
+
         <variable
             name="userData"
             type="com.nazrah.nazrahapp.models.UserData" />
     </data>
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/background_grey"
@@ -50,6 +54,19 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ivAddImage" />
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etUserName"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp60"
+                android:background="@drawable/rounded_corner_white"
+                android:gravity="center_vertical"
+                android:padding="20dp"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:hintTextColor="@color/light_grey"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivAddImage" />
+
             <TextView
                 android:id="@+id/tvEmail"
                 style="@style/label_m"
@@ -61,12 +78,11 @@
                 android:paddingTop="@dimen/dp8"
                 android:paddingEnd="@dimen/dp16"
                 android:paddingBottom="@dimen/dp8"
-                android:drawableEnd="@drawable/ic_lock"
                 android:text="@{userData.email}"
                 android:textSize="@dimen/default_14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvUserName" />
+                app:layout_constraintTop_toBottomOf="@+id/brUser" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvProfileList"
@@ -77,6 +93,13 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/brUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="etUserName,tvUserName" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>
